@@ -1,0 +1,615 @@
+//
+//  main.cpp
+//  TSP
+//
+//  Created by Prasetya Aditama on 10/6/16.
+//  Copyright © 2016 Prasetya Aditama. All rights reserved.
+//
+
+
+#include <iostream>
+using namespace std;
+int AB,AC,BD,BE,CE,CD,DF,EF;
+int AA,BB,CC,DD,EE,FF;
+int kota_awal;
+
+int main() {
+    
+//    cout<< " Jalur Traveling Salesman Problem " <<endl;
+//    cout<< "                A  \\     " <<endl;
+//    cout<< "               * *      " <<endl;
+//    cout<< "              *   *     " <<endl;
+//    cout<< "             *     *    " <<endl;
+//    cout<< "            B       C   " <<endl;
+//    cout<< "            **     **   " <<endl;
+//    cout<< "            * *   * *   " <<endl;
+//    cout<< "            *  * *  *   " <<endl;
+//    cout<< "            *   *   *   " <<endl;
+//    cout<< "            *  * *  *   " <<endl;
+//    cout<< "            * *   * *   " <<endl;
+//    cout<< "            **     **   " <<endl;
+//    cout<< "            D       E   " <<endl;
+//    cout<< "             *     *    " <<endl;
+//    cout<< "              *   *     " <<endl;
+//    cout<< "               * *      " <<endl;
+//    cout<< "                F       " <<endl;
+    
+    cout<< " Jalur Traveling Salesman Problem " <<endl;
+    cout<< "    C----E " <<endl;
+    cout<< "   / \\  / \\" <<endl;
+    cout<< "  /   \\/   \\" <<endl;
+    cout<< " A    /\\    F" <<endl;
+    cout<< "  \\  /  \\  /" <<endl;
+    cout<< "   \\/    \\/" <<endl;
+    cout<< "    B----D " <<endl;
+    cout<<endl;
+
+
+    //Nilai heuristik kota
+    cout<< "Masukkan nilai heuristik kota A = "; cin>> AA;
+    cout<< "Masukkan nilai heuristik kota B = "; cin>> BB;
+    cout<< "Masukkan nilai heuristik kota C = "; cin>> CC;
+    cout<< "Masukkan nilai heuristik kota D = "; cin>> DD;
+    cout<< "Masukkan nilai heuristik kota E = "; cin>> EE;
+    cout<< "Masukkan nilai heuristik kota F = "; cin>> FF;
+    cout<<endl;
+    
+    //Jarak antar kota
+    cout<< "Masukkan jarak kota A ke B = "; cin>> AB;
+    cout<< "Masukkan jarak kota A ke C = "; cin>> AC;
+    cout<< "Masukkan jarak kota B ke D = "; cin>> BD;
+    cout<< "Masukkan jarak kota B ke E = "; cin>> BE;
+    cout<< "Masukkan jarak kota C ke E = "; cin>> CE;
+    cout<< "Masukkan jarak kota C ke D = "; cin>> CD;
+    cout<< "Masukkan jarak kota D ke F = "; cin>> DF;
+    cout<< "Masukkan jarak kota E ke F = "; cin>> EF;
+    cout<<endl;
+    
+//    cout<< " Jalur Traveling Salesman Problem " <<endl;
+//    cout<< "                A="<< AA << "       " <<endl;
+//    cout<< "               * *      " <<endl;
+//    cout<< "              *   *     " <<endl;
+//    cout<< "             *     *    " <<endl;
+//    cout<< "            B=" << BB << "     C=" << CC << "    AB=" << AB<<endl;
+//    cout<< "            **     **   " << "   " << "AC=" << AC<<endl;
+//    cout<< "            * *   * *   " << "   " << "BD=" << BD<<endl;
+//    cout<< "            *  * *  *   " << "   " << "BE=" << BE<<endl;
+//    cout<< "            *   *   *   " << "   " << "CE=" << CE<<endl;
+//    cout<< "            *  * *  *   " << "   " << "CD=" << CD<<endl;
+//    cout<< "            * *   * *   " << "   " << "DF=" << DF<<endl;
+//    cout<< "            **     **   " << "   " << "EF=" << EF<<endl;
+//    cout<< "            D=" << DD << "     E=" << EE << "   " <<endl;
+//    cout<< "             *     *    " <<endl;
+//    cout<< "              *   *     " <<endl;
+//    cout<< "               * *      " <<endl;
+//    cout<< "                F=" << FF << "       " <<endl;
+    
+    cout<< " Jalur Traveling Salesman Problem " <<endl;
+    cout<< "     C    E" <<endl;
+    cout<< "     "<<CC<<"----"<<EE<<" " << "      AB=" << AB<<endl;
+    cout<< "    / \\  / \\" << "      AC=" << AC<<endl;
+    cout<< "   /   \\/   \\" << "     BD=" << BD<<endl;
+    cout<< "A "<<AA<<"    /\\    "<<FF<<" F" << "  BE=" << BE<<endl;
+    cout<< "   \\  /  \\  /" << "     CE=" << CE<<endl;
+    cout<< "    \\/    \\/" << "      CD=" << CD<<endl;
+    cout<< "     "<<BB<<"----"<<DD<<" " << "      DF=" << DF<<endl;
+    cout<< "     B    D   " << "    EF=" << EF<<endl;
+    cout<<endl;
+    
+    cout<< "| A=1 | B=2 | C=3 | D=4 | E=5 | F=6 |"<<endl;
+    cout<< "Masukkan kota pertama = "; cin >> kota_awal;
+    
+    switch (kota_awal)
+    {
+        case 1://A
+            if (BB+AB > CC+AC){
+                //A->C
+                if (DD+CD > EE+CE) {
+                    //A->C->E
+                    if (BB+BE > FF+EF) {
+                        //A->C->E->F_->D->B
+                        cout<< "A -> C -> E -> F -> D -> B \n";
+                        cout<< "h=" << AC+CE+EF+DF+BD;
+                    } else {
+                        //A->C->E->B_->D->F
+                        cout<< "A -> C -> E -> B -> D -> F \n";
+                        cout<< "h=" << AC+CE+BE+BD+DF;
+                    }
+                }
+                else{
+                    //A->C->D
+                    if (BB+BD > FF+DF) {
+                        //A->C->D->F_->E->B
+                        cout<< "A -> C -> D -> F -> E -> B \n";
+                        cout<< "h=" << AC+CD+DF+EF+BE;
+                    } else {
+                        //A->C->D->B_->E->F
+                        cout<< "A -> C -> D -> B -> E -> F \n";
+                        cout<< "h=" << AC+CD+BD+BE+EF;
+                    }
+                }
+            }
+            else{
+                //A->B
+                if (DD+BD > EE+BE) {
+                    //A->B->E
+                    if (CC+CE > FF+EF) {
+                        //A->B->E->F_->D->C
+                        cout<< "A -> B -> E -> F -> D -> C \n";
+                        cout<< "h=" << AB+BE+EF+DF+CD;
+                    } else {
+                        //A->B->E->C_->D->F
+                        cout<< "A -> B -> E -> C -> D -> F \n";
+                        cout<< "h=" << AB+BE+CE+CD+DF;
+                    }
+                }
+                else{
+                    //A->B->D
+                    if (CC+CD > FF+DF) {
+                        //A->B->D->F_->E->C
+                        cout<< "A -> B -> D -> F -> E -> C \n";
+                        cout<< "h=" << AB+BD+DF+EF+CE;
+                    } else {
+                        //A->B->D->C_->E->F
+                        cout<< "A -> B -> D -> C -> E -> F \n";
+                        cout<< "h=" << AB+BD+CD+CE+EF;
+                    }
+                }
+            }
+            break;
+            
+        case 2://B
+            if (AA+AB < EE+BE && AA+AB < DD+BD) {
+                //B->A_->C
+                if (EE+CE > DD+CD) {
+                    //B->A_->C->D_->F->E
+                    cout<< "B -> A -> C -> D -> F -> E \n";
+                    cout<< "h=" << AB+AC+CD+DF+EF;
+                } else {
+                    //B->A_->C->E_->F->D
+                    cout<< "B -> A -> C -> E -> F -> D \n";
+                    cout<< "h=" << AB+AC+CE+EF+DF;
+                }
+            } else {
+                if (EE+BE < AA+AB && EE+BE < DD+BD) {
+                    //B->E
+                    if (CC+CE > FF+EF) {
+                        //B->E->F_->D->C->A
+                        cout<< "B -> E -> F -> D -> C -> A \n";
+                        cout<< "h=" << BE+EF+DF+CD+AC;
+                    } else {
+                        //B->E->C
+                        if (AA+AC > DD+CD) {
+                            //B->E->C->D_->F
+                            if (AA+DF+BD+AB < AA+DF+CD+AC && AA+DF+BD+AB < AA+EF+BE+AB && AA+DF+BD+AB < AA+EF+CE+AC) {
+                                cout<< "B -> E -> C -> D -> F |Untuk ke kota| -> A |harus melewati kota lain yg sudah dilewati, yaitu F -> D -> B -> A\n";
+                                cout<< "h=" << BE+CE+CD+DF+DF+BD+AB;
+                            } else {
+                                if (AA+DF+CD+AC < AA+DF+BD+AB && AA+DF+CD+AC < AA+EF+BE+AB && AA+DF+CD+AC < AA+EF+CE+AC) {
+                                    cout<< "B -> E -> C -> D -> F |Untuk ke kota| -> A |harus melewati kota lain yg sudah dilewati, yaitu F -> D -> C -> A\n";
+                                    cout<< "h=" << BE+CE+CD+DF+DF+CD+AC;
+                                } else {
+                                    if (AA+EF+BE+AB < AA+DF+BD+AB && AA+EF+BE+AB < AA+DF+CD+AC && AA+EF+BE+AB < AA+EF+CE+AC) {
+                                        cout<< "B -> E -> C -> D -> F |Untuk ke kota| -> A |harus melewati kota lain yg sudah dilewati, yaitu F -> E -> B -> A\n";
+                                        cout<< "h=" << BE+CE+CD+DF+EF+BE+AB;
+                                    } else {
+                                        cout<< "B -> E -> C -> D -> F |Untuk ke kota| -> A |harus melewati kota lain yg sudah dilewati, yaitu F -> E -> C -> A\n";
+                                        cout<< "h=" << BE+CE+CD+DF+EF+CE+AC;
+                                    }
+                                }
+                            }
+                        } else {
+                            //B->E->C->A
+                            if (FF+AB+BD+DF > FF+AC+CD+DF) {
+                                //B->E->C->A__->C->D->F
+                                cout<< "B -> E -> C -> A |Untuk ke kota| -> D dan -> F |harus melewati kota lain yg sudah dilewati, yaitu C -> D -> F \n";
+                                cout<< "h=" << BE+CE+AC+AC+CD+DF;
+                            } else {
+                                cout<< "B -> E -> C -> A |Untuk ke kota| -> D dan -> F |harus melewati kota lain yg sudah dilewati, yaitu B -> D -> F \n";
+                                cout<< "h=" << BE+CE+AC+AB+BD+DF;
+                            }
+                        }
+                    }
+                } else {
+                    if (DD+BD < AA+AB && DD+BD < EE+BE) {
+                        //B->D
+                        if (CC+CD > FF+DF) {
+                            //B->D->F_->E->C->A
+                            cout<< "B -> D -> F -> E -> C -> A \n";
+                            cout<< "h=" << BD+DF+EF+CE+AC;
+                        } else {
+                            //B->D->C
+                            if (AA+AC > EE+CE) {
+                                //B->D->C->E_->F
+                                if (AA+DF+BD+AB < AA+DF+CD+AC && AA+DF+BD+AB < AA+EF+BE+AB && AA+DF+BD+AB < AA+EF+CE+AC) {
+                                    cout<< "B -> D -> C -> E -> F |Untuk ke kota| -> A |harus melewati kota lain yg sudah dilewati, yaitu F -> D -> B -> A\n";
+                                    cout<< "h=" << BD+CD+CE+EF+DF+BD+AB;
+                                } else {
+                                    if (AA+DF+CD+AC < AA+DF+BD+AB && AA+DF+CD+AC < AA+EF+BE+AB && AA+DF+CD+AC < AA+EF+CE+AC) {
+                                        cout<< "B -> D -> C -> E -> F |Untuk ke kota| -> A |harus melewati kota lain yg sudah dilewati, yaitu F -> D -> C -> A\n";
+                                        cout<< "h=" << BD+CD+CE+EF+DF+CD+AC;
+                                    } else {
+                                        if (AA+EF+BE+AB < AA+DF+BD+AB && AA+EF+BE+AB < AA+DF+CD+AC && AA+EF+BE+AB < AA+EF+CE+AC) {
+                                            cout<< "B -> D -> C -> E -> F |Untuk ke kota| -> A |harus melewati kota lain yg sudah dilewati, yaitu F -> E -> B -> A\n";
+                                            cout<< "h=" << BD+CD+CE+EF+EF+BE+AB;
+                                        } else {
+                                            cout<< "B -> D -> C -> E -> F |Untuk ke kota| -> A |harus melewati kota lain yg sudah dilewati, yaitu F -> E -> C -> A\n";
+                                            cout<< "h=" << BD+CD+CE+EF+EF+CE+AC;
+                                        }
+                                    }
+                                }
+                            } else {
+                                //B->D->C->A
+                                if (FF+AB+BE+EF > FF+AC+CE+EF) {
+                                    //B->D->C->A__->C->E->F
+                                    cout<< "B -> D -> C -> A |Untuk ke kota| -> E dan -> F |harus melewati kota lain yg sudah dilewati, yaitu C -> E -> F \n";
+                                    cout<< "h=" << BD+CD+AC+AC+CE+EF;
+                                } else {
+                                    cout<< "B -> D -> C -> A |Untuk ke kota| -> E dan -> F |harus melewati kota lain yg sudah dilewati, yaitu B -> E -> F \n";
+                                    cout<< "h=" << BD+CD+AC+AB+BE+EF;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            break;
+            
+        case 3://C
+            if (AA+AC < EE+CE && AA+AC < DD+CD) {
+                //C->A_->B
+                if (EE+BE > DD+BD) {
+                    //C->A_->B->D_->F->E
+                    cout<< "C -> A -> B -> D -> F -> E \n";
+                    cout<< "h=" << AC+AB+BD+DF+EF;
+                } else {
+                    //C->A_->B->E_->F->D
+                    cout<< "C -> A -> B -> E -> F -> D \n";
+                    cout<< "h=" << AC+AB+BD+EF+DF;
+                }
+            } else {
+                if (EE+CE < AA+AC && EE+CE < DD+CD) {
+                    //C->E
+                    if (BB+BE > FF+EF) {
+                        //C->E->F_->D->B->A
+                        cout<< "C -> E -> F -> D -> B -> A \n";
+                        cout<< "h=" << CE+EF+DF+BD+AB;
+                    } else {
+                        //C->E->B
+                        if (AA+AB > DD+BD) {
+                            //C->E->B->D_->F
+                            if (AA+DF+BD+AB < AA+DF+CD+AC && AA+DF+BD+AB < AA+EF+BE+AB && AA+DF+BD+AB < AA+EF+CE+AC) {
+                                cout<< "C -> E -> B -> D -> F |Untuk ke kota| -> A |harus melewati kota lain yg sudah dilewati, yaitu F -> D -> B -> A\n";
+                                cout<< "h=" << CE+BE+BD+DF+DF+BD+AB;
+                            } else {
+                                if (AA+DF+CD+AC < AA+DF+BD+AB && AA+DF+CD+AC < AA+EF+BE+AB && AA+DF+CD+AC < AA+EF+CE+AC) {
+                                    cout<< "C -> E -> B -> D -> F |Untuk ke kota| -> A |harus melewati kota lain yg sudah dilewati, yaitu F -> D -> C -> A\n";
+                                    cout<< "h=" << CE+BE+BD+DF+DF+CD+AC;
+                                } else {
+                                    if (AA+EF+BE+AB < AA+DF+BD+AB && AA+EF+BE+AB < AA+DF+CD+AC && AA+EF+BE+AB < AA+EF+CE+AC) {
+                                        cout<< "C -> E -> B -> D -> F |Untuk ke kota| -> A |harus melewati kota lain yg sudah dilewati, yaitu F -> E -> B -> A\n";
+                                        cout<< "h=" << CE+BE+BD+DF+EF+BE+AB;
+                                    } else {
+                                        cout<< "C -> E -> B -> D -> F |Untuk ke kota| -> A |harus melewati kota lain yg sudah dilewati, yaitu F -> E -> C -> A\n";
+                                        cout<< "h=" << CE+BE+BD+DF+EF+CE+AC;
+                                    }
+                                }
+                            }
+                        } else {
+                            //C->E->B->A
+                            if (FF+AB+BD+DF > FF+AC+CD+DF) {
+                                //B->E->C->A__->C->D->F
+                                cout<< "C -> E -> B -> A |Untuk ke kota| -> D dan -> F |harus melewati kota lain yg sudah dilewati, yaitu C -> D -> F \n";
+                                cout<< "h=" << CE+BE+AB+AC+CD+DF;
+                            } else {
+                                cout<< "C -> E -> B -> A |Untuk ke kota| -> D dan -> F |harus melewati kota lain yg sudah dilewati, yaitu B -> D -> F \n";
+                                cout<< "h=" << CE+BE+AB+AB+BD+DF;
+                            }
+                        }
+                    }
+                } else {
+                    if (DD+CD < AA+AC && DD+CD < EE+CE) {
+                        //C->D
+                        if (BB+BD > FF+DF) {
+                            //C->D->F_->E->C->A
+                            cout<< "C -> D -> F -> E -> B -> A \n";
+                            cout<< "h=" << CD+DF+EF+BE+AB;
+                        } else {
+                            //C->D->B
+                            if (AA+AB > EE+BE) {
+                                //C->D->B->E_->F
+                                if (AA+DF+BD+AB < AA+DF+CD+AC && AA+DF+BD+AB < AA+EF+BE+AB && AA+DF+BD+AB < AA+EF+CE+AC) {
+                                    cout<< "C -> D -> B -> E -> F |Untuk ke kota| -> A |harus melewati kota lain yg sudah dilewati, yaitu F -> D -> B -> A\n";
+                                    cout<< "h=" << CD+BD+BE+EF+DF+BD+AB;
+                                } else {
+                                    if (AA+DF+CD+AC < AA+DF+BD+AB && AA+DF+CD+AC < AA+EF+BE+AB && AA+DF+CD+AC < AA+EF+CE+AC) {
+                                        cout<< "C -> D -> B-> E -> F |Untuk ke kota| -> A |harus melewati kota lain yg sudah dilewati, yaitu F -> D -> C -> A\n";
+                                        cout<< "h=" << CD+BD+BE+EF+DF+CD+AC;
+                                    } else {
+                                        if (AA+EF+BE+AB < AA+DF+BD+AB && AA+EF+BE+AB < AA+DF+CD+AC && AA+EF+BE+AB < AA+EF+CE+AC) {
+                                            cout<< "C -> D -> B -> E -> F |Untuk ke kota| -> A |harus melewati kota lain yg sudah dilewati, yaitu F -> E -> B -> A\n";
+                                            cout<< "h=" << CD+BD+BE+EF+EF+BE+AB;
+                                        } else {
+                                            cout<< "C -> D -> B -> E -> F |Untuk ke kota| -> A |harus melewati kota lain yg sudah dilewati, yaitu F -> E -> C -> A\n";
+                                            cout<< "h=" << CD+BD+BE+EF+EF+CE+AC;
+                                        }
+                                    }
+                                }
+                            } else {
+                                //C->D->B->A
+                                if (FF+AB+BE+EF > FF+AC+CE+EF) {
+                                    //C->D->B->A__->C->E->F
+                                    cout<< "C -> D -> B -> A |Untuk ke kota| -> E dan -> F |harus melewati kota lain yg sudah dilewati, yaitu C -> E -> F \n";
+                                    cout<< "h=" << CD+BD+AB+AC+CE+EF;
+                                } else {
+                                    cout<< "C -> D -> B -> A |Untuk ke kota| -> E dan -> F |harus melewati kota lain yg sudah dilewati, yaitu B -> E -> F \n";
+                                    cout<< "h=" << CD+BD+AB+AB+BE+EF;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            break;
+            
+        case 4://D
+            if (FF+DF < CC+CD && FF+DF < BB+BD) {
+                //D->F_->E
+                if (BB+BE > CC+CE) {
+                    //D->F_->E->C_->A->B
+                    cout<< "D -> F -> E -> C -> A -> B \n";
+                    cout<< "h=" << DF+EF+CE+AC+AB;
+                } else {
+                    //D->F_->E->B_->A->C
+                    cout<< "D -> F -> E -> B -> A -> C \n";
+                    cout<< "h=" << DF+EF+BE+AB+AC;
+                }
+            } else {
+                if (CC+CD < BB+BD && CC+CD < FF+DF) {
+                    //D->C
+                    if (EE+CE > AA+AC) {
+                        //D->C->A_->B->E->F
+                        cout<< "D -> C -> A -> B -> E -> F \n";
+                        cout<< "h=" << CD+AC+AB+BE+EF;
+                    } else {
+                        //D->C->E
+                        if (FF+EF > BB+BE) {
+                            //D->C->E->B_->A
+                            if (FF+DF+BD+AB < FF+DF+CD+AC && FF+DF+BD+AB < FF+EF+BE+AB && FF+DF+BD+AB < FF+EF+CE+AC) {
+                                cout<< "D -> C -> E -> B -> A |Untuk ke kota| -> F |harus melewati kota lain yg sudah dilewati, yaitu A -> B -> D -> F\n";
+                                cout<< "h=" << CD+CE+BE+AB+AB+BD+DF;
+                            } else {
+                                if (FF+DF+CD+AC < FF+DF+BD+AB && FF+DF+CD+AC < FF+EF+BE+AB && FF+DF+CD+AC < FF+EF+CE+AC) {
+                                    cout<< "D -> C -> E -> B -> A |Untuk ke kota| -> F |harus melewati kota lain yg sudah dilewati, yaitu A -> C -> D -> F\n";
+                                    cout<< "h=" << CD+CE+BE+AB+AC+CD+DF;
+                                } else {
+                                    if (FF+EF+BE+AB < FF+DF+BD+AB && FF+EF+BE+AB < FF+DF+CD+AC && FF+EF+BE+AB < FF+EF+CE+AC) {
+                                        cout<< "D -> C -> E -> B -> A |Untuk ke kota| -> F |harus melewati kota lain yg sudah dilewati, yaitu A -> B -> E -> F\n";
+                                        cout<< "h=" << CD+CE+BE+AB+AB+BE+EF;
+                                    } else {
+                                        cout<< "D -> C -> E -> B -> A |Untuk ke kota| -> F |harus melewati kota lain yg sudah dilewati, yaitu A -> C -> E -> F\n";
+                                        cout<< "h=" << CD+CE+BE+AB+AC+CE+EF;
+                                    }
+                                }
+                            }
+                        } else {
+                            //D->C->E->F
+                            if (AA+AB+BE+EF > AA+AB+BD+DF) {
+                                //D->C->E->F__->D->B->A
+                                cout<< "D -> C -> E -> F |Untuk ke kota| -> B dan -> A |harus melewati kota lain yg sudah dilewati, yaitu D -> B -> A \n";
+                                cout<< "h=" << CD+CE+EF+DF+BD+AB;
+                            } else {
+                                cout<< "D -> C -> E -> F |Untuk ke kota| -> B dan -> A |harus melewati kota lain yg sudah dilewati, yaitu E -> B -> A \n";
+                                cout<< "h=" << CD+CE+EF+EF+BE+AB;
+                            }
+                        }
+                    }
+                } else {
+                    if (BB+BD < FF+DF && BB+BD < CC+CD) {
+                        //D->B
+                        if (EE+BE > AA+AB) {
+                            //D->B->A_->C->E->F
+                            cout<< "D -> B -> A -> C -> E -> F \n";
+                            cout<< "h=" << BD+AB+AC+CE+EF;
+                        } else {
+                            //D->B->E
+                            if (FF+EF > CC+CE) {
+                                //D->B->E->C_->A
+                                if (FF+DF+BD+AB < FF+DF+CD+AC && FF+DF+BD+AB < FF+EF+BE+AB && FF+DF+BD+AB < FF+EF+CE+AC) {
+                                    cout<< "D -> B -> E -> C -> A |Untuk ke kota| -> F |harus melewati kota lain yg sudah dilewati, yaitu A -> B -> D -> F\n";
+                                    cout<< "h=" << BD+BE+CE+AC+AB+BD+DF;
+                                } else {
+                                    if (FF+DF+CD+AC < FF+DF+BD+AB && FF+DF+CD+AC < FF+EF+BE+AB && FF+DF+CD+AC < FF+EF+CE+AC) {
+                                        cout<< "D -> B -> E -> C -> A |Untuk ke kota| -> F |harus melewati kota lain yg sudah dilewati, yaitu A -> C -> D -> F\n";
+                                        cout<< "h=" << BD+BE+CE+AC+AC+CD+DF;
+                                    } else {
+                                        if (FF+EF+BE+AB < FF+DF+BD+AB && FF+EF+BE+AB < FF+DF+CD+AC && FF+EF+BE+AB < FF+EF+CE+AC) {
+                                            cout<< "D -> B -> E -> C -> A |Untuk ke kota| -> F |harus melewati kota lain yg sudah dilewati, yaitu A -> B -> E -> F\n";
+                                            cout<< "h=" << BD+BE+CE+AC+AB+BE+EF;
+                                        } else {
+                                            cout<< "D -> B -> E -> C -> A |Untuk ke kota| -> F |harus melewati kota lain yg sudah dilewati, yaitu A -> C -> E -> F\n";
+                                            cout<< "h=" << BD+BE+CE+AC+AC+CE+EF;
+                                        }
+                                    }
+                                }
+                            } else {
+                                //D->B->E->F
+                                if (AA+AC+CD+DF > AA+AC+CE+EF) {
+                                    //D->B->E->F__->E->C->A
+                                    cout<< "D -> B -> E -> F |Untuk ke kota| -> C dan -> A |harus melewati kota lain yg sudah dilewati, yaitu E -> C -> A \n";
+                                    cout<< "h=" << BD+BE+EF+EF+CE+AC;
+                                } else {
+                                    cout<< "D -> B -> E -> F |Untuk ke kota| -> C dan -> A |harus melewati kota lain yg sudah dilewati, yaitu D -> C -> A \n";
+                                    cout<< "h=" << BD+BE+EF+DF+CD+AC;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            break;
+            
+        case 5://E
+            if (FF+EF < CC+CE && FF+EF < BB+BE) {
+                //E->F_->D
+                if (BB+BD > CC+CD) {
+                    //E->F_->D->C_->A->B
+                    cout<< "E -> F -> D -> C -> A -> B \n";
+                    cout<< "h=" << EF+DF+CD+AC+AB;
+                } else {
+                    //E->F_->D->B_->A->C
+                    cout<< "E -> F -> D -> B -> A -> C \n";
+                    cout<< "h=" << EF+DF+BD+AB+AC;
+                }
+            } else {
+                if (CC+CE < BB+BE && CC+CE < FF+EF) {
+                    //E->C
+                    if (DD+CD > AA+AC) {
+                        //E->C->A_->B->D->F
+                        cout<< "E -> C -> A -> B -> D -> F \n";
+                        cout<< "h=" << CE+AC+AB+BD+DF;
+                    } else {
+                        //E->C->D
+                        if (FF+DF > BB+BD) {
+                            //E->C->D->B_->A
+                            if (FF+DF+BD+AB < FF+DF+CD+AC && FF+DF+BD+AB < FF+EF+BE+AB && FF+DF+BD+AB < FF+EF+CE+AC) {
+                                cout<< "E -> C -> D -> B -> A |Untuk ke kota| -> F |harus melewati kota lain yg sudah dilewati, yaitu A -> B -> D -> F\n";
+                                cout<< "h=" << CE+CD+BD+AB+AB+BD+DF;
+                            } else {
+                                if (FF+DF+CD+AC < FF+DF+BD+AB && FF+DF+CD+AC < FF+EF+BE+AB && FF+DF+CD+AC < FF+EF+CE+AC) {
+                                    cout<< "E -> C -> D -> B -> A |Untuk ke kota| -> F |harus melewati kota lain yg sudah dilewati, yaitu A -> C -> D -> F\n";
+                                    cout<< "h=" << CE+CD+BD+AB+AC+CD+DF;
+                                } else {
+                                    if (FF+EF+BE+AB < FF+DF+BD+AB && FF+EF+BE+AB < FF+DF+CD+AC && FF+EF+BE+AB < FF+EF+CE+AC) {
+                                        cout<< "E -> C -> D -> B -> A |Untuk ke kota| -> F |harus melewati kota lain yg sudah dilewati, yaitu A -> B -> E -> F\n";
+                                        cout<< "h=" << CE+CD+BD+AB+AB+BE+EF;
+                                    } else {
+                                        cout<< "B -> C -> D -> B -> A |Untuk ke kota| -> F |harus melewati kota lain yg sudah dilewati, yaitu A -> C -> E -> F\n";
+                                        cout<< "h=" << CE+CD+BD+AB+AC+CE+EF;
+                                    }
+                                }
+                            }
+                        } else {
+                            //E->C->D->F
+                            if (AA+AB+BE+EF > AA+AB+BD+DF) {
+                                //D->C->E->F__->D->B->A
+                                cout<< "E -> C -> D -> F |Untuk ke kota| -> B dan -> A |harus melewati kota lain yg sudah dilewati, yaitu D -> B -> A \n";
+                                cout<< "h=" << CE+CD+DF+DF+BD+AB;
+                            } else {
+                                cout<< "E -> C -> D -> F |Untuk ke kota| -> B dan -> A |harus melewati kota lain yg sudah dilewati, yaitu E -> B -> A \n";
+                                cout<< "h=" << CE+CD+DF+EF+BE+AB;
+                            }
+                        }
+                    }
+                } else {
+                    if (BB+BE < FF+EF && BB+BE < CC+CE) {
+                        //E->B
+                        if (DD+BD > AA+AB) {
+                            //E->B->A_->C->D->F
+                            cout<< "E -> B -> A -> C -> D -> F \n";
+                            cout<< "h=" << BE+AB+AC+CD+DF;
+                        } else {
+                            //E->B->D
+                            if (FF+DF > CC+CD) {
+                                //E->B->D->C_->A
+                                if (FF+DF+BD+AB < FF+DF+CD+AC && FF+DF+BD+AB < FF+EF+BE+AB && FF+DF+BD+AB < FF+EF+CE+AC) {
+                                    cout<< "E -> B -> D -> C -> A |Untuk ke kota| -> F |harus melewati kota lain yg sudah dilewati, yaitu A -> B -> D -> F\n";
+                                    cout<< "h=" << BE+BD+CD+AC+AB+BD+DF;
+                                } else {
+                                    if (FF+DF+CD+AC < FF+DF+BD+AB && FF+DF+CD+AC < FF+EF+BE+AB && FF+DF+CD+AC < FF+EF+CE+AC) {
+                                        cout<< "E -> B -> D -> C -> A |Untuk ke kota| -> F |harus melewati kota lain yg sudah dilewati, yaitu A -> C -> D -> F\n";
+                                        cout<< "h=" << BE+BD+CD+AC+AC+CD+DF;
+                                    } else {
+                                        if (FF+EF+BE+AB < FF+DF+BD+AB && FF+EF+BE+AB < FF+DF+CD+AC && FF+EF+BE+AB < FF+EF+CE+AC) {
+                                            cout<< "E -> B -> D -> C -> A |Untuk ke kota| -> F |harus melewati kota lain yg sudah dilewati, yaitu A -> B -> E -> F\n";
+                                            cout<< "h=" << BE+BD+CD+AC+AB+BE+EF;
+                                        } else {
+                                            cout<< "E -> B -> D -> C -> A |Untuk ke kota| -> F |harus melewati kota lain yg sudah dilewati, yaitu A -> C -> E -> F\n";
+                                            cout<< "h=" << BE+BD+CD+AC+AC+CE+EF;
+                                        }
+                                    }
+                                }
+                            } else {
+                                //E->B->D->F
+                                if (AA+AC+CD+DF > AA+AC+CE+EF) {
+                                    //E->B->D->F__->E->C->A
+                                    cout<< "E -> B -> D -> F |Untuk ke kota| -> C dan -> A |harus melewati kota lain yg sudah dilewati, yaitu E -> C -> A \n";
+                                    cout<< "h=" << BE+BD+DF+EF+CE+AC;
+                                } else {
+                                    cout<< "E -> B -> D -> F |Untuk ke kota| -> C dan -> A |harus melewati kota lain yg sudah dilewati, yaitu D -> C -> A \n";
+                                    cout<< "h=" << BE+BD+DF+DF+CD+AC;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            break;
+            
+        case 6://F
+            if (FF+DF > FF+EF){
+                //F->E
+                if (EE+BE > EE+CE) {
+                    //F->E->C
+                    if (CC+CD > CC+AC) {
+                        //F->E->C->A_->B->D
+                        cout<< "F -> E -> C -> A -> B -> D \n";
+                        cout<< "h=" << EF+CE+AC+AB+BD;
+                    } else {
+                        //F->E->C->D_->B->A
+                        cout<< "F -> E -> C -> D -> B -> A \n";
+                        cout<< "h=" << EF+CE+CD+BD+AB;
+                    }
+                }
+                else{
+                    //F->E->B
+                    if (DD+BD > DD+DF) {
+                        //F->E->B->A_->C->D
+                        cout<< "F -> E -> B -> A -> C -> D \n";
+                        cout<< "h=" << EF+BE+AB+AC+CD;
+                    } else {
+                        //F->E->B->D_->C->A
+                        cout<< "F -> E -> B -> D -> C -> A \n";
+                        cout<< "h=" << EF+BE+BD+CD+AC;
+                    }
+                }
+            }
+            else{
+                //F->D
+                if (BB+BD > BB+BE) {
+                    //F->D->C
+                    if (EE+CE > EE+EF) {
+                        //F->D->C->A_->B->E
+                        cout<< "F -> D -> C -> A -> B -> E \n";
+                        cout<< "h=" << DF+CD+AC+AB+BE;
+                    } else {
+                        //F->D->C->E_->B->A
+                        cout<< "F -> D -> C -> E -> B -> A \n";
+                        cout<< "h=" << DF+CD+CE+BE+AB;
+                    }
+                }
+                else{
+                    //F->D->B
+                    if (DD+CD > DD+DF) {
+                        //F->D->B->A_->C->E
+                        cout<< "F -> D -> B -> A -> C -> E \n";
+                        cout<< "h=" << DF+BD+AB+AC+CE;
+                    } else {
+                        //F->D->B->E_->C->A
+                        cout<< "F -> D -> B -> E -> C -> A \n";
+                        cout<< "h=" << DF+BD+BE+CE+AC;
+                    }
+                }
+            }
+            break;
+        
+        default: cout << "Silahkan Masukan Lagi\n"
+            << "Dari pilihan kota yang ada di atas.\n\n";
+            break;
+    }
+    return 0;
+}
+
+
+
+
